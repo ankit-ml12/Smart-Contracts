@@ -20,8 +20,7 @@ contract EventOragnization{
        require(block.timestamp <date, "you can create only in future");
        require(ticketCount>0, "atleast one ticket require to organize event");
      events[nextId]=Event(msg.sender, name, date, price,  ticketCount, ticketCount);
-     nextId++;
-   }
+     nextId++; }
    
    function buyTickets(uint id, uint quantity) external payable{
       require(id>nextId,"Event does not exist");
@@ -32,7 +31,6 @@ contract EventOragnization{
       tickets[msg.sender][id]+=quantity;
       events[id].ticketRemaining-=quantity;
    }
-
     function transferTickets(uint id, uint quantity, address to)external {
       require(id>nextId,"Event does not exist");
       require(events[id].date>block.timestamp, "The event is completed");
@@ -40,5 +38,4 @@ contract EventOragnization{
      tickets[msg.sender][id]-=quantity;
      tickets[to][id]+=quantity;
    }
-
 }
