@@ -14,11 +14,7 @@ contract Lottery{
         participants.push(payable(msg.sender));
     }
 
-    function getBalance() public view returns(uint){
-        require(msg.sender==manger);
-        return address(this).balance;
-    }
-    
+
     function random() public view returns(uint){
  return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty, 
  msg.sender)))%participants.length;
